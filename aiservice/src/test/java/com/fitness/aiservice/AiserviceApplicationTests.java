@@ -15,6 +15,7 @@
 
 
 
+
 package com.fitness.aiservice;
 
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,9 @@ import org.springframework.boot.test.context.SpringBootTest;
     "groq.api.key=test-api-key",
     "groq.api.model=openai/gpt-oss-20b",
     "eureka.client.enabled=false",
-    "spring.cloud.discovery.enabled=false"
+    "spring.cloud.discovery.enabled=false",
+    "spring.rabbitmq.listener.simple.auto-startup=false",
+    "spring.rabbitmq.listener.direct.auto-startup=false"
 })
 class AiserviceApplicationTests {
 
