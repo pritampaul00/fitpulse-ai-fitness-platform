@@ -1,0 +1,132 @@
+name: FitPulse CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fitpulse-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-tests:
+    name: Test ${{ matrix.service }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - activityservice
+          - aiservice
+          - configserver
+          - eureka
+          - gateway
+          - userservice
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ci_password
+          POSTGRES_DB: fitness_user_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+          - 5672:5672
+        options: >-
+          --health-cmd "rabbitmq-diagnostics -q ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DB_PASSWORD: ci_password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/fitness_user_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: ci_password
+
+      SPRING_DATA_MONGODB_URI: mongodb://localhost:27017/fitnessactivity
+
+      SPRING_RABBITMQ_HOST: localhost
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+
+      GROQ_API_KEY: ci-placeholder-key
+      GROQ_API_URL: https://api.groq.com/openai/v1/chat/completions
+      GROQ_API_MODEL: openai/gpt-oss-20b
+      GEMINI_API_KEY: ci-placeholder-key
+      GEMINI_API_URL: https://generativelanguage.googleapis.com
+
+      ACTIVITY_SERVICE_URL: http://localhost:8082
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: "**/pom.xml"
+
+      - name: Run Maven tests
+        working-directory: ${{ matrix.service }}
+        run: |
+          chmod +x mvnw
+          ./mvnw -B -ntp clean test
+
+  frontend-build:
+    name: Build React Frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: fitness-app-frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: fitness-app-frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: fitness-app-frontend
+        run: npm run build
