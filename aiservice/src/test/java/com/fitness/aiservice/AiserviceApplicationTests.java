@@ -14,6 +14,7 @@
 
 
 
+
 package com.fitness.aiservice;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,9 @@ import org.springframework.boot.test.context.SpringBootTest;
     "rabbitmq.routing.key=test-activity-routing-key",
     "groq.api.url=https://api.groq.com/openai/v1/chat/completions",
     "groq.api.key=test-api-key",
-    "groq.api.model=openai/gpt-oss-20b"
+    "groq.api.model=openai/gpt-oss-20b",
+    "eureka.client.enabled=false",
+    "spring.cloud.discovery.enabled=false"
 })
 class AiserviceApplicationTests {
 
@@ -33,5 +36,3 @@ class AiserviceApplicationTests {
     void contextLoads() {
     }
 }
-
-
