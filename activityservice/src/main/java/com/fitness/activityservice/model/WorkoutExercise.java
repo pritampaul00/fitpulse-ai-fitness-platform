@@ -1,0 +1,23 @@
+package com.fitness.activityservice.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class WorkoutExercise {
+
+    private String exerciseName;
+
+    private Integer sets;
+
+    private Integer reps;
+
+    private Integer durationMinutes;
+
+    private String notes;
+}

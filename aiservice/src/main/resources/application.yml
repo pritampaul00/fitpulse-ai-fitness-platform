@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ai-service
+  config:
+    import: optional:file:../.env[.properties],optional:configserver:http://localhost:8888
+
+activity:
+  service:
+    url: http://localhost:8082

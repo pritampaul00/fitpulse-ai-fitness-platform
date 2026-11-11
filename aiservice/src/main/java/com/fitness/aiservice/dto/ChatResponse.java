@@ -1,0 +1,51 @@
+// package com.fitness.aiservice.dto;
+
+// import lombok.AllArgsConstructor;
+// import lombok.Builder;
+// import lombok.Data;
+// import lombok.NoArgsConstructor;
+
+// import java.time.LocalDateTime;
+
+// @Data
+// @Builder
+// @NoArgsConstructor
+// @AllArgsConstructor
+// public class ChatResponse {
+
+//     private String conversationId;
+
+//     private String title;
+
+//     private String reply;
+
+//     private LocalDateTime timestamp;
+// }
+
+
+package com.fitness.aiservice.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ChatResponse {
+
+    private String conversationId;
+
+    private String title;
+
+    private String reply;
+
+    private LocalDateTime timestamp;
+
+    private List<String> suggestions;
+}

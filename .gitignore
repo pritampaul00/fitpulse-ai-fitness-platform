@@ -1,0 +1,23 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+dist/
+target/
+
+# IDE files
+.idea/
+.vscode/
+
+# Archives and logs
+*.zip
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+**/wrapper-temp/

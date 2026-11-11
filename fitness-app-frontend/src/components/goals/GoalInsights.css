@@ -1,0 +1,159 @@
+.goal-insights-card {
+    background: linear-gradient(
+        145deg,
+        #211d32,
+        #191a23
+    ) !important;
+    color: #f5f5f8 !important;
+    border: 1px solid #514174;
+    border-radius: 15px !important;
+}
+
+.goal-insights-card .MuiCardContent-root {
+    padding: 24px;
+}
+
+.goal-insights-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.goal-insights-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.goal-insights-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    color: #c4b5fd;
+    background: rgba(121, 88, 237, 0.2);
+}
+
+.goal-insights-title h6 {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.goal-insights-subtitle {
+    color: #aaa8b9 !important;
+    font-size: 12px !important;
+    margin-top: 5px !important;
+    line-height: 1.6 !important;
+}
+
+.goal-insights-header .MuiButton-root {
+    background: #7958ed;
+    color: white;
+    text-transform: none;
+    border-radius: 9px;
+    white-space: nowrap;
+}
+
+.goal-insights-header .MuiButton-root:hover {
+    background: #6945df;
+}
+
+.goal-insights-loading {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #bcb9cc;
+}
+
+.goal-insights-empty {
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.035);
+    color: #aaa8b9;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.goal-insights-result {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #393448;
+    color: #dedde8;
+    font-size: 14px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.goal-insights-result h2 {
+    color: #c4b5fd;
+    font-size: 18px;
+    margin: 22px 0 10px;
+}
+
+.goal-insights-result h3 {
+    color: #c4b5fd;
+    font-size: 15px;
+    margin: 18px 0 8px;
+}
+
+.goal-insights-result p {
+    margin: 9px 0;
+}
+
+.goal-insights-result ul,
+.goal-insights-result ol {
+    padding-left: 24px;
+}
+
+.goal-insights-result li {
+    margin: 7px 0;
+}
+
+.goal-insights-result strong {
+    color: #ffffff;
+}
+
+.goal-insights-result table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+}
+
+.goal-insights-result th,
+.goal-insights-result td {
+    padding: 9px;
+    border: 1px solid #3a394a;
+    text-align: left;
+}
+
+.goal-insights-result th {
+    background: #292638;
+    color: #ffffff;
+}
+
+.goal-insights-timestamp {
+    color: #858597 !important;
+    font-size: 10px !important;
+    text-align: right;
+    margin-top: 20px !important;
+}
+
+@media (max-width: 600px) {
+    .goal-insights-card .MuiCardContent-root {
+        padding: 17px;
+    }
+
+    .goal-insights-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

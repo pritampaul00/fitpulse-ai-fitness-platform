@@ -1,0 +1,25 @@
+package com.fitness.aiservice.repository;
+
+import com.fitness.aiservice.model.Recommendation;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface RecommendationRepository
+                extends MongoRepository<Recommendation, String> {
+
+        // Fetch all recommendations for a specific user
+        List<Recommendation> findByUserId(String userId);
+
+        // Fetch recommendation associated with a specific activity
+        Optional<Recommendation> findByActivityId(String activityId);
+
+        Optional<Recommendation> findByActivityIdAndUserId(String activityId, String userId);
+
+        // Fetch the latest five recommendations for AI Coach context
+        List<Recommendation> findTop5ByUserIdOrderByCreatedAtDesc(
+                        String userId);
+}
